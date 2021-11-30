@@ -48,7 +48,9 @@ function App() {
         <Route path="/" exact>
           <ToDos message="Welcome!" nonadmin />
           <Users users={data} title="Users" />
-          <div class="card border-dark mb-3" style={{width: "18rem;"}}>
+          <div class="row">
+            <div class="col-md-6">
+          <div class="card border-dark mb-3">
     <form>
     <legend>Add To Do Item</legend>
     <div class="form-row">
@@ -71,37 +73,11 @@ function App() {
       </div>
       <button type="submit" class="btn btn-primary">Add Item</button>
     </form>
-    </div>
-    <div class="row-cols-1 row-cols-md-2">
-    <div class="col mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{data.name}</h5>
-          <p class="card-text">Do the dishes, post and pans</p>
-          <p class="card-text">Difficulty: 1</p>
+    </div>    
         </div>
-      </div>
-    </div>
-    <div class="col mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{data.name}</h5>
-          <p class="card-text">Take the dog for a nice long walk.  Do 3 miles at least.</p>
-          <p class="card-text">Difficulty: 1</p>
         </div>
-      </div>
-    </div>
-    <div class="col mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Rosie</h5>
-          <p class="card-text">Run around the block and see what's up</p>
-          <p class="card-text align-right">Difficulty: 2</p>
-        </div>
-      </div>
-    </div>
-    </div>
         </Route>
+
         <Route path="/Users">
           <Users users={data} title="User List" />
 
