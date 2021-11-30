@@ -3,7 +3,7 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Users from './components/Users';
 import ToDos from './components/ToDos';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav, Row, Col } from 'react-bootstrap';
 
 const data = [
   { id: 1, name: 'Autumn', item: 'Do the dishes, post and pans', assigned: 'Cat',  difficulty: 1 },
@@ -51,6 +51,9 @@ function App() {
           <div class="row">
             <div class="col-md-6">
           <div class="card border-dark mb-3">
+   <Container>
+     <Row>
+       <Col sm={6} md={5} lg={4}>
     <form>
     <legend>Add To Do Item</legend>
     <div class="form-row">
@@ -73,6 +76,9 @@ function App() {
       </div>
       <button type="submit" class="btn btn-primary">Add Item</button>
     </form>
+    </Col>
+    </Row>
+    </Container>
     </div>    
         </div>
         </div>

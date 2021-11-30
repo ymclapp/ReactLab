@@ -1,4 +1,6 @@
 import React from "react";
+import { Toast, Badge } from "react-bootstrap";
+import './ToDos.css';
 
 class UsersClassComponent extends React.Component {
     render() {
@@ -29,38 +31,26 @@ function Users(props) {
 
     return (
         <>
-        <div class="card w-50">           
-            <div class="card border-dark">
-             <card body="card text-dark ">
-                {users.map(user => (
-                    <card key={ user.id } > 
-
-                    <h5 class="card-title"><strong>{ user.name } </strong></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Assigned to:  {user.assigned}</h6>
-                    <p class="card-text">{user.item}</p>
-                    <h6 class="card-subtitle mb-2 text-muted">Difficulty:  {user.difficulty}</h6>
-                    <a href="#" class="btn btn-primary">Close</a>
-                    <p></p>
-                    </card>                    
-                    ))}
-                    
-            </card>
-            </div>
-        </div>
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-
-              <strong class="mr-auto">props.name</strong>
-              <small>11 mins ago</small>
+        {users.map(user => (
+        <Toast class="mt-4" style={{width: "32rem"}} key={user.name}>           
+             <Toast.Header>
+                 {user.completed ? <Badge pill bg="success">Complete</Badge> : <Badge pill bg="danger">Pending</Badge>}
+                 <span class="d-inline-block ms-2 me-auto">{user.assigned}</span>                 
+                 <small>11 mins ago</small>
               <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
-            <div class="toast-body">
-              Hello, world! This is a toast message.
-            </div>
-          </div>
-
+                 </Toast.Header>
+                 <Toast.Body>
+                     <p class="todo-item">
+                         {user.item}
+                     </p>
+                     <p class="todo-difficulty">
+                         Difficulty:  {user.difficulty}
+                     </p>
+                 </Toast.Body>
+        </Toast>                
+                    ))}           
         </>
     )
 }
