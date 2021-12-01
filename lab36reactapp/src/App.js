@@ -3,8 +3,10 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Users from './components/Users';
 import ToDos from './components/ToDos';
-import { Container, Navbar, Nav } from 'react-bootstrap';
 import AddToDo from './components/AddToDo';
+import About from './components/About';
+import { Container, Navbar, Nav } from 'react-bootstrap';
+
 import { useState } from 'react';
 
 const data = [
@@ -46,6 +48,7 @@ function App() {
         <Nav.Link href="/">Home</Nav.Link>
         <Nav.Link href="/ToDos">YOUR To Dos!</Nav.Link>
         <Nav.Link href="/Users">Users</Nav.Link>
+        <Nav.Link href="/About">About</Nav.Link>
         {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -114,6 +117,9 @@ function App() {
           <Users users={data} title="User List" />
 
         </Route>
+        <Route path="/About">
+        <About message="Welcome!" nonadmin />
+          </Route>
         <Route>
           <h1>Not Found!</h1>
         </Route>
