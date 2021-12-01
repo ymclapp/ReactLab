@@ -3,7 +3,9 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Users from './components/Users';
 import ToDos from './components/ToDos';
-import { Container, Navbar, Nav, Row, Col } from 'react-bootstrap';
+import { Container, Navbar, Nav } from 'react-bootstrap';
+import AddToDo from './components/AddToDo';
+import { useState } from 'react';
 
 const data = [
   { id: 1, name: 'Autumn', item: 'Do the dishes, post and pans', assigned: 'Cat',  difficulty: 1 },
@@ -12,9 +14,26 @@ const data = [
   { id: 4, name: 'Chalene', item: 'Be beautiful', assigned: 'Brett', difficulty: 2  },
   { id: 5, name: 'Tony', item: '200 sit ups', assigned: 'Tony',  difficulty: 3  },
 ];
+let nextId = 50;
+
 
 
 function App() {
+  const [users, setUsers] = useState(data);
+
+  function submit(formData) {
+    const newUser = {
+      ...formData, //copy all the properties into the new object
+      id:  nextId++, //Guess what next Id will be from API
+    };
+
+    const newUsers = [
+      ...users, //Spread = copy all of users into the new array
+      newUser,
+    ];
+    setUsers(newUsers);
+  }  
+  
   return (
     <>
     <div className="App">
@@ -48,7 +67,10 @@ function App() {
         <Route path="/" exact>
           <ToDos message="Welcome!" nonadmin />
           <Users users={data} title="Users" />
-          <div class="row">
+          <AddToDo onSubmit={submit}/>
+
+          
+          {/*<div class="row">
             <div class="col-md-6">
           <div class="card border-dark mb-3">
    <Container>
@@ -81,9 +103,13 @@ function App() {
     </Container>
     </div>    
         </div>
-        </div>
+</div>*/}
         </Route>
+        <Route path="/ToDos">
+          <Users users={data} title="User List" />
 
+
+        </Route>
         <Route path="/Users">
           <Users users={data} title="User List" />
 
