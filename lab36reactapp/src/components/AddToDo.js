@@ -14,7 +14,7 @@ function AddToDo(props) {
     const submit = e => {
         e.preventDefault()
         {/*const form = e.target;
-        const { item } = form.elements;*/}
+        const { item, assigned, difficulty } = form.elements;*/}
         fetch('https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/', {
             method: 'POST',
             body:  JSON.stringify({item, assigned, difficulty}),
@@ -22,8 +22,8 @@ function AddToDo(props) {
             console.error(err);
             alert ("There was an error, please try again")
         })
-       {/*} e.target.reset();
-      e.target.elements.item.focus();       */}
+       {/*} form.reset();
+      item.form.elements.focus();       */}
     }
 
     return (        

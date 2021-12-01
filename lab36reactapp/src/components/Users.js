@@ -34,7 +34,7 @@ function Users(props) {
         {users.map(user => (
         <Toast class="mt-4" style={{width: "32rem"}} key={user.name}>           
              <Toast.Header>
-                 {user.completed ? <Badge pill bg="success">Complete</Badge> : <Badge pill bg="danger">Pending</Badge>}
+                 {user.completed ? <Badge pill bg="danger">Complete</Badge> : <Badge pill bg="success">Pending</Badge>}
                  <span class="d-inline-block ms-2 me-auto">{user.assigned}</span>                 
                  <small>11 mins ago</small>
               <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
