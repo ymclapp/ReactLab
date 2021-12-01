@@ -34,3 +34,51 @@
     </div>
   </div>
 </div>
+
+
+
+                {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">
+          <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+  </NavDropdown>*/}
+
+  class UsersClassComponent extends React.Component {
+    render() {
+        //destructuring
+        //const user = this.props.user;
+        const { users } = this.props;
+
+        return (
+            <ul>
+                {users.map(user => (
+                    <li key={user.id} > {user.name} {user.item} {user.assigned} {user.difficulty} </li>
+
+                ))}
+            </ul>
+
+        )
+
+    }
+}
+
+
+class AboutClassComponent extends React.Component {
+    render() {
+        return (
+            <p>
+                <i> Yvette Clapp About </i> 
+            </p>
+        )
+    }
+}
+
+class ToDoslassComponent extends React.Component {
+    render() {
+        return (
+            <h1>These are the To Dos for YOU!</h1>
+        )
+    }
+}

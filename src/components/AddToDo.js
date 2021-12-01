@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 
 function AddToDo(props) {
   const [item, setItem] = useState('')

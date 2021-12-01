@@ -1,14 +1,5 @@
 import React from 'react';
 
-class ToDoslassComponent extends React.Component {
-    render() {
-        return (
-            <h1>These are the To Dos for YOU!</h1>
-        )
-    }
-}
-
-
 //export default HomeClassComponent;
 
 function ToDos(props) {

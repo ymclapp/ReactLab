@@ -1,16 +1,5 @@
 import React from 'react';
 
-class AboutClassComponent extends React.Component {
-    render() {
-        return (
-            <p>
-                <i> Yvette Clapp About </i> 
-            </p>
-        )
-    }
-}
-
-
 function About(props) {
     console.log("About props", props);
     const { message } = props;
