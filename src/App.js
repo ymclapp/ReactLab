@@ -5,7 +5,8 @@ import Users from './components/Users';
 import ToDos from './components/ToDos';
 import AddToDo from './components/AddToDo';
 import About from './components/About';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import Header from './components/Header';
+import { Container, Navbar } from 'react-bootstrap';
 
 import { useState } from 'react';
 
@@ -40,20 +41,9 @@ function App() {
   return (
     <>
       <div className="App">
-        <Navbar bg="primary" variant="light" expand="lg">
-          <Container>
-            <Navbar.Brand href="#home">Your To Do List!!</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/ToDos">YOUR To Dos!</Nav.Link>
-                <Nav.Link href="/Users">Users</Nav.Link>
-                <Nav.Link href="/About">About</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+
+        <Header />
+
         <Navbar bg="dark" variant="dark" expand="lg">
           <Container>
             <Navbar.Brand >To Do List Manager (2)</Navbar.Brand>
@@ -65,23 +55,24 @@ function App() {
             <ToDos message="Welcome!" nonadmin />
             <Users users={data} title="Users" />
             <AddToDo onSubmit={submit} />
-
           </Route>
+
           <Route path="/ToDos">
             <Users users={data} title="User List" />
-
-
           </Route>
+
           <Route path="/Users">
             <Users users={data} title="User List" />
-
           </Route>
+
           <Route path="/About">
             <About message="Welcome!" nonadmin />
           </Route>
+
           <Route>
             <h1>Not Found!</h1>
           </Route>
+          
         </Switch>
       </div>
 
