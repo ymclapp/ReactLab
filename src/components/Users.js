@@ -2,26 +2,6 @@ import React from "react";
 import { Toast, Badge } from "react-bootstrap";
 import './ToDos.css';
 
-class UsersClassComponent extends React.Component {
-    render() {
-        //destructuring
-        //const user = this.props.user;
-        const { users } = this.props;
-
-        return (
-            <ul>
-                {users.map(user => (
-                    <li key={user.id} > {user.name} {user.item} {user.assigned} {user.difficulty} </li>
-
-                ))}
-            </ul>
-
-        )
-
-    }
-}
-
-
 //export default PeopleClassComponent;
 //Function component must ask for props parameter
 //
