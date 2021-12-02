@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 //import jwt from 'json'
 
 //Normally get this from our environment
@@ -19,16 +19,17 @@ export default function useAuth() {
 }
 
 export function AuthProvider(props) {
-    //const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
 
     const state = {
-        user: null,
+        //user: null,
+        user,
 
         login,
     };
 
     async function login(loginData) {
-        console.log(loginData);
+        //console.log(loginData);
 
         const result = await fetch(`${usersAPI}/Login`, {
             method: 'post',
@@ -41,12 +42,12 @@ export function AuthProvider(props) {
         const resultBody = await result.json();
         //console.log(resultBody)
 
-      //  if (result.ok) {
-     //       setUser(resultBody);
-      //  } else {
-      //      console.warn('auth failed', resultBody);
-      //  }
-      console.log(resultBody)
+        if (result.ok) {
+            setUser(resultBody);
+        } else {
+            console.warn('auth failed', resultBody);
+        }
+      //console.log(resultBody)
     }
 
     return (
