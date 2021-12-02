@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-import './App.css';
+import './App.css'
 import { Switch, Route } from 'react-router-dom';
 import Users from './components/Users';
 import ToDos from './components/ToDos';
