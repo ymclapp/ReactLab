@@ -28,7 +28,7 @@ export function AuthProvider(props) {
     };
 
     async function login(loginData) {
-        //console.log(loginData);
+        console.log(loginData);
 
         const result = await fetch(`${usersAPI}/Login`, {
             method: 'post',
