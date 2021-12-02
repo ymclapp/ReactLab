@@ -6,8 +6,8 @@ import ToDos from './components/ToDos';
 import AddToDo from './components/AddToDo';
 import About from './components/About';
 import Header from './components/Header';
-import Login from './components/auth/Login';
-import Auth from './components/auth';
+//import Login from './components/auth/Login';
+//import Auth from './components/auth';
 import { Container, Navbar } from 'react-bootstrap';
 import { useState } from 'react';
 
@@ -56,9 +56,9 @@ function App() {
           <Route path="/" exact>
             <ToDos message="Welcome!" nonadmin />
             <Users users={users} title="Users" />
-            <Auth>
+            {/*<Auth>*/}
             <AddToDo onSubmit={submit} />
-            </Auth>
+            {/*</Auth>*/}
           </Route>
 
           <Route path="/ToDos">
@@ -73,9 +73,9 @@ function App() {
             <About message="Welcome!" nonadmin />
           </Route>
 
-          <Route path="/Login">
+          {/*<Route path="/Login">
             <Login />
-          </Route>
+          </Route>*/}
 
           <Route>
             <h1>Not Found!</h1>

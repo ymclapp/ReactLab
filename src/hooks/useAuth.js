@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useMemo, useCallback } from 'react';
-import jwt from 'jsonwebtoken';
+import { jwt } from 'jsonwebtoken';
 
 //Normally get this from our environment
 const usersAPI = 'https://deltav-todo.azurewebsites.net/api/v1/Users';
