@@ -21,13 +21,33 @@ export default function useAuth() {
 export function AuthProvider(props) {
     const [user, setUser] = useState(null);
 
-    const auth = useMemo(() => ({
+    const hasPermission = useCallback(function (permission) {
+        if(!user) return false;
+
+        //No specific permission requested, but they are signed in
+        if(!permission) return true;
+
+        //Asked for permission and user has none
+        if(!user.permission) return false;
+
+        //Can user do the specific thing?
+        return user.permission.includes(permission);
+
+    }, [user]);
+    
+    const auth = useMemo(() => {
+        console.log('New auth state!');
+
+        return ({
+
         //user: null,
         user,
 
+        hasPermission,
         login,
         logout,
-    }), [user]);
+    });
+ }, [user, hasPermission]);
 
     async function login(loginData) {
         //console.log(loginData);
@@ -55,6 +75,7 @@ export function AuthProvider(props) {
     function logout() {
         setUser(null);
     }
+ 
 
     return (
         <AuthContext.Provider value={auth}>
