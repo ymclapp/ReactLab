@@ -1,6 +1,6 @@
 
-import { createContext, useContext, useState, useMemo, useCallback } from 'react';
-import { jwt } from 'jsonwebtoken';
+import { createContext, useContext, useState, useMemo, useCallback, useEffect } from 'react'
+import jwt from 'jsonwebtoken'
 
 //Normally get this from our environment
 const usersAPI = 'https://deltav-todo.azurewebsites.net/api/v1/Users';
@@ -19,7 +19,8 @@ export default function useAuth() {
     return auth;
 }
 
-export function AuthProvider(props) {const [user, setUser] = useState(null);
+export function AuthProvider(props) {
+  const [user, setUser] = useState(null);
 
   const hasPermission = useCallback(function (permission) {
     if (!user) return false;
@@ -48,6 +49,15 @@ export function AuthProvider(props) {const [user, setUser] = useState(null);
       logout,
     });
   }, [user, hasPermission]);
+  
+  useEffect(() => {
+    //Load token/user from cookie!
+  }, []);
+
+  useEffect(() => {
+    //Set or remove cookie!
+
+  }, [user])
 
   async function login(loginData) {
     //console.log(loginData);
@@ -81,7 +91,7 @@ export function AuthProvider(props) {const [user, setUser] = useState(null);
     <AuthContext.Provider value={auth}>
       {props.children}
     </AuthContext.Provider>
-  );
+  )
 }
 
 function processUser(user) {
