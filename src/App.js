@@ -36,6 +36,7 @@ function App() {
       ...users, //Spread = copy all of users into the new array
       newUser,
     ];
+
     setUsers(newUsers);
   }
 
@@ -54,9 +55,9 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <ToDos message="Welcome!" nonadmin />
-            <Users users={data} title="Users" />
+            <Users users={users} title="Users" />
             <Auth>
-            <AddToDo onSubmit={submit} />
+              <AddToDo onSubmit={submit} />
             </Auth>
           </Route>
 

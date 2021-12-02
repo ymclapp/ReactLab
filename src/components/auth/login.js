@@ -16,6 +16,8 @@ export default function Login() {
         //console.log(loginData);
 
         login(loginData);
+
+        
         form.reset();
     }
     
