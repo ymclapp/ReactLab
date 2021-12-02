@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth'
 
 function AddToDo(props) {
   const { hasPermission } = useAuth();
-  const [item, setItem] = useState('')
+  const [title, setTitle] = useState('')
   const [assigned, setAssigned] = useState('')
   const [difficulty, setDifficulty] = useState('')
   const [status, setStatus] = useState('Pending');
@@ -13,7 +13,7 @@ function AddToDo(props) {
     e.preventDefault()
     fetch('https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/', {
       method: 'POST',
-      body: JSON.stringify({ item, assigned, difficulty, status }),
+      body: JSON.stringify({ title, assigned, difficulty, status }),
     }).catch(err => {
       console.error(err);
       alert("There was an error, please try again")
@@ -32,8 +32,8 @@ function AddToDo(props) {
               <legend>Add To Do Item</legend>
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="item">To Do Item</label>
-                  <input type="text" className="form-control" id="item" placeholder="Item Details" name="item" value={item} onChange={e => setItem(e.target.value)} />
+                  <label htmlFor="title">To Do Item</label>
+                  <input type="text" className="form-control" id="title" placeholder="Item Details" name="item" value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
               </div>
               <div className="form-row">
