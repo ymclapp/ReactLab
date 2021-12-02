@@ -5,17 +5,19 @@ import Users from './components/Users';
 import ToDos from './components/ToDos';
 import AddToDo from './components/AddToDo';
 import About from './components/About';
-import { Container, Navbar, Nav } from 'react-bootstrap';
-
+import Header from './components/Header';
+import Login from './components/auth/Login';
+import Auth from './components/auth';
+import { Container, Navbar } from 'react-bootstrap';
 import { useState } from 'react';
 
 const data = [
   //need to do a get here from the airtable
-  { id: 1, name: 'Autumn', item: 'Do the dishes, post and pans', assigned: 'Cat', difficulty: 1 },
-  { id: 2, name: 'Shaun T', item: 'Take the dog for a nice long walk.  Do 3 miles at least.', assigned: 'Scott', difficulty: 1 },
-  { id: 3, name: 'Joel', item: 'Run around the block and see what is up', assigned: 'Brianna', difficulty: 2 },
-  { id: 4, name: 'Chalene', item: 'Be beautiful', assigned: 'Brett', difficulty: 2 },
-  { id: 5, name: 'Tony', item: '200 sit ups', assigned: 'Tony', difficulty: 3 },
+  { id: 1, name: 'Autumn', item: 'Do the dishes, post and pans', assigned: 'Cat', difficulty: 1, completed: false },
+  { id: 2, name: 'Shaun T', item: 'Take the dog for a nice long walk.  Do 3 miles at least.', assigned: 'Scott', difficulty: 1, completed: false },
+  { id: 3, name: 'Joel', item: 'Run around the block and see what is up', assigned: 'Brianna', difficulty: 2, completed: false },
+  { id: 4, name: 'Chalene', item: 'Be beautiful', assigned: 'Brett', difficulty: 2, completed: false },
+  { id: 5, name: 'Tony', item: '200 sit ups', assigned: 'Tony', difficulty: 3, completed: false },
 ];
 let nextId = 50;
 
@@ -40,20 +42,9 @@ function App() {
   return (
     <>
       <div className="App">
-        <Navbar bg="primary" variant="light" expand="lg">
-          <Container>
-            <Navbar.Brand href="#home">Your To Do List!!</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/ToDos">YOUR To Dos!</Nav.Link>
-                <Nav.Link href="/Users">Users</Nav.Link>
-                <Nav.Link href="/About">About</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+
+        <Header />
+
         <Navbar bg="dark" variant="dark" expand="lg">
           <Container>
             <Navbar.Brand >To Do List Manager (2)</Navbar.Brand>
@@ -64,24 +55,31 @@ function App() {
           <Route path="/" exact>
             <ToDos message="Welcome!" nonadmin />
             <Users users={data} title="Users" />
+            <Auth>
             <AddToDo onSubmit={submit} />
-
+            </Auth>
           </Route>
+
           <Route path="/ToDos">
             <Users users={data} title="User List" />
-
-
           </Route>
+
           <Route path="/Users">
             <Users users={data} title="User List" />
-
           </Route>
+
           <Route path="/About">
             <About message="Welcome!" nonadmin />
           </Route>
+
+          <Route path="/Login">
+            <Login />
+          </Route>
+
           <Route>
             <h1>Not Found!</h1>
           </Route>
+
         </Switch>
       </div>
 

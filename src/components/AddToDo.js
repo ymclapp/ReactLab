@@ -1,16 +1,19 @@
 import { Container } from 'react-bootstrap';
 import { React, useState } from 'react';
+import useAuth from '../hooks/useAuth'
 
 function AddToDo(props) {
+  const { user } = useAuth();
   const [item, setItem] = useState('')
   const [assigned, setAssigned] = useState('')
   const [difficulty, setDifficulty] = useState('')
+  const [status, setStatus] = useState('Pending');
 
   const submit = e => {
     e.preventDefault()
     fetch('https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/', {
       method: 'POST',
-      body: JSON.stringify({ item, assigned, difficulty }),
+      body: JSON.stringify({ item, assigned, difficulty, status }),
     }).catch(err => {
       console.error(err);
       alert("There was an error, please try again")
@@ -48,7 +51,13 @@ function AddToDo(props) {
                     id="formControlRange" />
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary">Add Item</button>
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="status">Status:</label>
+                  <input type="text" className="form-control" id="status" name="status" value="Pending" onChange={e => setStatus(e.target.value)} />
+                </div>
+              </div>
+              <button type="submit" disabled={!user} className="btn btn-primary">Add Item</button>
             </form>
           </Container>
         </div>
