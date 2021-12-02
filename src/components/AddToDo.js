@@ -1,7 +1,9 @@
 import { Container } from 'react-bootstrap';
 import { React, useState } from 'react';
+import useAuth from '../hooks/useAuth'
 
 function AddToDo(props) {
+  const { user } = useAuth();
   const [item, setItem] = useState('')
   const [assigned, setAssigned] = useState('')
   const [difficulty, setDifficulty] = useState('')
@@ -55,7 +57,7 @@ function AddToDo(props) {
                   <input type="text" className="form-control" id="status" name="status" value="Pending" onChange={e => setAssigned(e.target.value)} />
                 </div>
               </div>
-              <button type="submit" className="btn btn-primary">Add Item</button>
+              <button type="submit" disabled={!user} className="btn btn-primary">Add Item</button>
             </form>
           </Container>
         </div>
