@@ -16,7 +16,7 @@ function Header() {
             <Nav.Link href="/ToDos">YOUR To Dos!</Nav.Link>
             <Nav.Link href="/Users">Users</Nav.Link>
             <Nav.Link href="/About">About</Nav.Link>
-            {!user && <Nav.Link href="/login">Sign In</Nav.Link>}
+            {!user && <Nav.Link href="/Login">Sign In</Nav.Link>}
             {user &&
               <>
                 Welcome back, {user.username}

@@ -6,6 +6,7 @@ import ToDos from './components/ToDos';
 import AddToDo from './components/AddToDo';
 import About from './components/About';
 import Header from './components/Header';
+import Login from './components/auth/Login';
 import { Container, Navbar } from 'react-bootstrap';
 
 import { useState } from 'react';
@@ -67,6 +68,10 @@ function App() {
 
           <Route path="/About">
             <About message="Welcome!" nonadmin />
+          </Route>
+
+          <Route path="/Login">
+            <Login />
           </Route>
 
           <Route>
