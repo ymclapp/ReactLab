@@ -3,7 +3,7 @@ import { React, useState } from 'react';
 import useAuth from '../hooks/useAuth'
 
 function AddToDo(props) {
-  const { user } = useAuth();
+  const { hasPermission } = useAuth();
   const [item, setItem] = useState('')
   const [assigned, setAssigned] = useState('')
   const [difficulty, setDifficulty] = useState('')
@@ -20,6 +20,8 @@ function AddToDo(props) {
     })
 
   }
+
+  let canCreate = hasPermission('create');
 
   return (
     <div className="row">
@@ -57,7 +59,7 @@ function AddToDo(props) {
                   <input type="text" className="form-control" id="status" name="status" value="Pending" onChange={e => setStatus(e.target.value)} />
                 </div>
               </div>
-              <button type="submit" disabled={!user} className="btn btn-primary">Add Item</button>
+              <button type="submit" disabled={!canCreate} className="btn btn-primary">Add Item</button>
             </form>
           </Container>
         </div>
