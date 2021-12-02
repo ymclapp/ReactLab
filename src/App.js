@@ -56,9 +56,9 @@ function App() {
           <Route path="/" exact>
             <ToDos message="Welcome!" nonadmin />
             <Users users={users} title="Users" />
-            {/*<Auth>*/}
-            <AddToDo onSubmit={submit} />
-            {/*</Auth>*/}
+            <Auth>
+              <AddToDo onSubmit={submit} />
+            </Auth>
           </Route>
 
           <Route path="/ToDos">
