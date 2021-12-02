@@ -26,6 +26,7 @@ export function AuthProvider(props) {
         user,
 
         login,
+        logout,
     };
 
     async function login(loginData) {
@@ -48,6 +49,10 @@ export function AuthProvider(props) {
             console.warn('auth failed', resultBody);
         }
       //console.log(resultBody)
+    }
+
+    function logout() {
+        setUser(null);
     }
 
     return (
