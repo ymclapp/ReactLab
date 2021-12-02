@@ -12,11 +12,11 @@ import { useState } from 'react';
 
 const data = [
   //need to do a get here from the airtable
-  { id: 1, name: 'Autumn', item: 'Do the dishes, post and pans', assigned: 'Cat', difficulty: 1 },
-  { id: 2, name: 'Shaun T', item: 'Take the dog for a nice long walk.  Do 3 miles at least.', assigned: 'Scott', difficulty: 1 },
-  { id: 3, name: 'Joel', item: 'Run around the block and see what is up', assigned: 'Brianna', difficulty: 2 },
-  { id: 4, name: 'Chalene', item: 'Be beautiful', assigned: 'Brett', difficulty: 2 },
-  { id: 5, name: 'Tony', item: '200 sit ups', assigned: 'Tony', difficulty: 3 },
+  { id: 1, name: 'Autumn', item: 'Do the dishes, post and pans', assigned: 'Cat', difficulty: 1, completed: false },
+  { id: 2, name: 'Shaun T', item: 'Take the dog for a nice long walk.  Do 3 miles at least.', assigned: 'Scott', difficulty: 1, completed: false },
+  { id: 3, name: 'Joel', item: 'Run around the block and see what is up', assigned: 'Brianna', difficulty: 2, completed: false },
+  { id: 4, name: 'Chalene', item: 'Be beautiful', assigned: 'Brett', difficulty: 2, completed: false },
+  { id: 5, name: 'Tony', item: '200 sit ups', assigned: 'Tony', difficulty: 3, completed: false },
 ];
 let nextId = 50;
 
@@ -72,7 +72,7 @@ function App() {
           <Route>
             <h1>Not Found!</h1>
           </Route>
-          
+
         </Switch>
       </div>
 

@@ -5,12 +5,13 @@ function AddToDo(props) {
   const [item, setItem] = useState('')
   const [assigned, setAssigned] = useState('')
   const [difficulty, setDifficulty] = useState('')
+  const [status, setStatus] = useState('Pending');
 
   const submit = e => {
     e.preventDefault()
     fetch('https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/', {
       method: 'POST',
-      body: JSON.stringify({ item, assigned, difficulty }),
+      body: JSON.stringify({ item, assigned, difficulty, status }),
     }).catch(err => {
       console.error(err);
       alert("There was an error, please try again")
@@ -46,6 +47,12 @@ function AddToDo(props) {
                     onChange={e => setDifficulty(e.target.value)}
                     className="form-control-range"
                     id="formControlRange" />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="status">Status:</label>
+                  <input type="text" className="form-control" id="status" name="status" value="Pending" onChange={e => setAssigned(e.target.value)} />
                 </div>
               </div>
               <button type="submit" className="btn btn-primary">Add Item</button>
