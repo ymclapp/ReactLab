@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react'
 //import jwt from 'json'
 
 //Normally get this from our environment
@@ -19,10 +19,10 @@ export default function useAuth() {
 }
 
 export function AuthProvider(props) {
-    const [user, setUser] = useState(null);
+    //const [user, setUser] = useState(null);
 
-    const auth = {
-        user,
+    const state = {
+        user: null,
 
         login,
     };
@@ -41,15 +41,16 @@ export function AuthProvider(props) {
         const resultBody = await result.json();
         //console.log(resultBody)
 
-        if (result.ok) {
-            setUser(resultBody);
-        } else {
-            console.warn('auth failed', resultBody);
-        }
+      //  if (result.ok) {
+     //       setUser(resultBody);
+      //  } else {
+      //      console.warn('auth failed', resultBody);
+      //  }
+      console.log(resultBody)
     }
 
     return (
-        <AuthContext.Provider value={auth}>
+        <AuthContext.Provider value={state}>
             {props.children}
         </AuthContext.Provider>
     )
