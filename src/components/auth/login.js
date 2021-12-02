@@ -16,12 +16,13 @@ export default function Login() {
         //console.log(loginData);
 
         login(loginData);
+        form.reset();
     }
     
     return (
         <form onSubmit = {handleLoginSubmit}>
             <label>Username:  <input name="username" /></label>
-            <label>Password:  <input password="password" type="password"/></label>
+            <label>Password:  <input name="password" type="password"/></label>
             <button type="submit">Sign In</button>
         </form>
     )

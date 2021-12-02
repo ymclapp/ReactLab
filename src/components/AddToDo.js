@@ -54,7 +54,7 @@ function AddToDo(props) {
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="status">Status:</label>
-                  <input type="text" className="form-control" id="status" name="status" value="Pending" onChange={e => setAssigned(e.target.value)} />
+                  <input type="text" className="form-control" id="status" name="status" value="Pending" onChange={e => setStatus(e.target.value)} />
                 </div>
               </div>
               <button type="submit" disabled={!user} className="btn btn-primary">Add Item</button>
