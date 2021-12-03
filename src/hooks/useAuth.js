@@ -29,10 +29,10 @@ export function AuthProvider(props) {
     if (!permission) return true;
 
     //Asked for permission and user has none
-    if (!user.permission) return false;
+    if (!user.permissions) return false;
 
     //Can user do the specific thing?
-    return user.permission.includes(permission);
+    return user.permissions.includes(permission);
 
   }, [user]);
 
@@ -62,8 +62,8 @@ export function AuthProvider(props) {
   async function login(loginData) {
     //console.log(loginData);
 
-    const result = await fetch(`${usersAPI}/Login`, {
-      method: 'post',
+    const result = await fetch(`${usersAPI}/login`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -74,7 +74,7 @@ export function AuthProvider(props) {
     console.log(resultBody);
 
     if (result.ok) {
-      let user = processUser(resultBody);
+      let user = processUser(resultBody)
       setUser(user);
     } else {
       console.warn('auth failed', resultBody);

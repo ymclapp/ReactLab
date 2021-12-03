@@ -23,7 +23,7 @@ function Users(props) {
                     </Toast.Header>
                     <Toast.Body>
                         <p className="todo-item">
-                            {user.item}
+                            {user.title}
                         </p>
                         <p className="todo-difficulty">
                             Difficulty:  {user.difficulty}
