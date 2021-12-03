@@ -24,19 +24,19 @@ let nextId = 50;
 
 
 function App() {
-  const [users, setUsers] = useState(data);
+  const [toDoItems, setToDoItems] = useState(data);
 
   function submit(formData) {
-    const newUser = {
+    const newToDoItem = {
       ...formData, //copy all the properties into the new object
       id: nextId++, //Guess what next Id will be from API
     };
 
-    const newUsers = [
-      ...users, //Spread = copy all of users into the new array
-      newUser,
+    const newToDoItems = [
+      ...toDoItems, //Spread = copy all of users into the new array
+      newToDoItem,
     ];
-    setUsers(newUsers);
+    setToDoItems(newToDoItems);
   }
 
   return (
@@ -54,7 +54,7 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <ToDos message="Welcome!" nonadmin />
-            {/*<Users users={data} title="Users" />*/}
+            <ToDos toDos={toDoItems} title="To Do Items" />
 
             <AddToDo onSubmit={submit} />
 

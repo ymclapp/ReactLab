@@ -48,6 +48,7 @@ export default function Todos() {
                         <Badge pill bg="success">
                             Pending
                         </Badge>}
+                        <span></span>
                         {/*{data.map(todo => (*/}
                         <span 
                             className="d-inline-block ms-2 me-auto">
@@ -70,7 +71,7 @@ export default function Todos() {
                     {/*<Toast.Body key={todo.id} >*/}
                     <Toast.Body>
                         <p 
-                        className="todo-item">
+                        className="todo-title">
                             {todo.title}
                         </p>
                         <p 

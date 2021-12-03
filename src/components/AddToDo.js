@@ -7,13 +7,14 @@ function AddToDo(props) {
   const [title, setTitle] = useState('')
   const [assignedTo, setAssignedTo] = useState('')
   const [difficulty, setDifficulty] = useState('')
-  const [completed, setCompleted] = useState('false');
+
+  const todoApi = 'https://deltav-todo.azurewebsites.net/api/v1/Todos';
 
   const submit = e => {
     e.preventDefault()
-    fetch('https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/', {
+    fetch(todoApi, {
       method: 'POST',
-      body: JSON.stringify({ title, assignedTo, difficulty, completed }),
+      body: JSON.stringify({ title, assignedTo, difficulty }),
     }).catch(err => {
       console.error(err);
       alert("There was an error, please try again")
@@ -28,7 +29,8 @@ function AddToDo(props) {
       <div className="col-md-6">
         <div className="card border-dark mb-3">
           <Container>
-            <form onSubmit={submit} action="https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/" method="post" >
+            {/*<form onSubmit={submit} action="https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/" method="post" >*/}
+            <form onSubmit={submit} action="todoApi" methods="post">
               <legend>Add To Do Item</legend>
               <div className="form-row">
                 <div className="form-group">
@@ -51,12 +53,6 @@ function AddToDo(props) {
                     onChange={e => setDifficulty(e.target.value)}
                     className="form-control-range"
                     id="formControlRange" />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="completed">Status:</label>
-                  <input type="text" className="form-control" id="completed" name="completed" value="false" onChange={e => setCompleted(e.target.value)} />
                 </div>
               </div>
               <button type="submit" disabled={!canCreate} className="btn btn-primary">Add Item</button>
