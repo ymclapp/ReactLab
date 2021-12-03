@@ -1,5 +1,6 @@
 import { Navbar, Container, Nav } from 'react-bootstrap'
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth'
+import { NavLink } from 'react-router-dom'
 
 
 function Header() {
@@ -12,10 +13,10 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/ToDos">YOUR To Dos!</Nav.Link>
-            <Nav.Link href="/Users">Users</Nav.Link>
-            <Nav.Link href="/About">About</Nav.Link>
+            <Nav.Link as = { NavLink } to ="/">Home</Nav.Link>
+            <Nav.Link as = { NavLink } to ="/ToDos">YOUR To Dos!</Nav.Link>
+            <Nav.Link as = { NavLink } to ="/Users">Users</Nav.Link>
+            <Nav.Link as = { NavLink } to ="/About">About</Nav.Link>
             {!user && <Nav.Link href="/Login">Sign In</Nav.Link>}
             {user &&
               <>
