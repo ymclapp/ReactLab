@@ -32,7 +32,7 @@ function AddToDo(props) {
               <legend>Add To Do Item</legend>
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="title">To Do Item</label>
+                  <label htmlFor="title">To Do Title</label>
                   <input type="text" className="form-control" id="title" placeholder="Item Details" name="item" value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
               </div>

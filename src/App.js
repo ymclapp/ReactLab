@@ -7,7 +7,7 @@ import AddToDo from './components/AddToDo';
 import About from './components/About';
 import Header from './components/Header';
 import Login from './components/auth/Login';
-import Auth from './components/auth';
+//import Auth from './components/auth';
 import { Container, Navbar } from 'react-bootstrap';
 import { useState } from 'react';
 
@@ -55,9 +55,9 @@ function App() {
           <Route path="/" exact>
             <ToDos message="Welcome!" nonadmin />
             <Users users={data} title="Users" />
-            <Auth>
+
             <AddToDo onSubmit={submit} />
-            </Auth>
+
           </Route>
 
           <Route path="/ToDos">
