@@ -1,7 +1,8 @@
+import './ToDos.css';
 import useAuth from '../hooks/useAuth'
 import useFetch from '../hooks/useFetch'
 import Auth from './auth'
-import { Card, Container } from 'react-bootstrap'
+import { Badge, Toast } from 'react-bootstrap'
 
 const todoApi = 'https://deltav-todo.azurewebsites.net/api/v1/Todos';
 
@@ -11,16 +12,16 @@ export default function Todos() {
 
     async function handleToDoDelete(todo) {
         console.log('Deleting...', todo);
-        if(!user) {
+        if (!user) {
             console.warn('Anonymous should not be allowed to delete!');
             return;
         }
 
         //Ideally this would also be encapsulated in useFetch
         await fetch(`${todoApi}/${todo.id}`, {
-            method:  'delete',
-            headers:  {
-                'Authorization':  `Bearere $[user.token]`
+            method: 'delete',
+            headers: {
+                'Authorization': `Bearere $[user.token]`
             }
         })
 
@@ -32,19 +33,62 @@ export default function Todos() {
     }
 
     return (
-        <Container>
-            <Card bg="warning" border="dark" style={{ fontSize: 25 }}>
+        <>
             {data.map(todo => (
-                <Card.Body key={todo.id} > 
-                {todo.title}
-
-                <Auth permission='delete'>
-                    <button bg="primary" onClick={() => handleToDoDelete(todo)}>Delete</button>
-                </Auth>
-                </Card.Body>
+                <Toast 
+                className="mt-4" 
+                style={{ width: "32rem" }} 
+                key={todo.id}>
+                    <Toast.Header>
+                        {todo.completed ? 
+                        <Badge pill bg="danger">
+                            Complete
+                            </Badge> 
+                        : 
+                        <Badge pill bg="success">
+                            Pending
+                        </Badge>}
+                        {/*{data.map(todo => (*/}
+                        <span 
+                            className="d-inline-block ms-2 me-auto">
+                                {todo.assignedTo}
+                                </span>
+                        <small>
+                            11 mins ago
+                            </small>
+                        <button 
+                        type="button" 
+                        className="ml-2 mb-1 close" 
+                        data-dismiss="toast" 
+                        aria-label="Close">
+                            <span 
+                            aria-hidden="true">
+                                &times;
+                            </span>
+                        </button>
+                    </Toast.Header>
+                    {/*<Toast.Body key={todo.id} >*/}
+                    <Toast.Body>
+                        <p 
+                        className="todo-item">
+                            {todo.title}
+                        </p>
+                        <p 
+                        className="todo-difficulty">
+                        Difficulty:  {todo.difficulty}
+                        </p>
+                        <Auth 
+                        permission='delete'>
+                            <button 
+                            bg="primary" 
+                            onClick={() => handleToDoDelete(todo)}>
+                                Delete
+                            </button>
+                        </Auth>
+                    </Toast.Body>
+                </Toast>
             ))}
-        </Card>
-        </Container >
+        </>
     )
 }
 

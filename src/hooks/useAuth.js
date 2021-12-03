@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useState, useMemo, useCallback, useEffect } from 'react'
+import { createContext, useContext, useState, useMemo, useCallback, useEffect } from 'react';
 import jwt from 'jsonwebtoken'
 
 //Normally get this from our environment

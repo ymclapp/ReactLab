@@ -5,15 +5,15 @@ import useAuth from '../hooks/useAuth'
 function AddToDo(props) {
   const { hasPermission } = useAuth();
   const [title, setTitle] = useState('')
-  const [assigned, setAssigned] = useState('')
+  const [assignedTo, setAssignedTo] = useState('')
   const [difficulty, setDifficulty] = useState('')
-  const [status, setStatus] = useState('Pending');
+  const [completed, setCompleted] = useState('false');
 
   const submit = e => {
     e.preventDefault()
     fetch('https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/', {
       method: 'POST',
-      body: JSON.stringify({ title, assigned, difficulty, status }),
+      body: JSON.stringify({ title, assignedTo, difficulty, completed }),
     }).catch(err => {
       console.error(err);
       alert("There was an error, please try again")
@@ -38,8 +38,8 @@ function AddToDo(props) {
               </div>
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="assigned">Assigned To</label>
-                  <input type="text" className="form-control" id="assigned" placeholder="Assignee Name" name="assigned" value={assigned} onChange={e => setAssigned(e.target.value)} />
+                  <label htmlFor="assignedTo">Assigned To</label>
+                  <input type="text" className="form-control" id="assignedTo" placeholder="Assignee Name" name="assignedTo" value={assignedTo} onChange={e => setAssignedTo(e.target.value)} />
                 </div>
               </div>
               <div className="form-row">
@@ -55,8 +55,8 @@ function AddToDo(props) {
               </div>
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="status">Status:</label>
-                  <input type="text" className="form-control" id="status" name="status" value="Pending" onChange={e => setStatus(e.target.value)} />
+                  <label htmlFor="completed">Status:</label>
+                  <input type="text" className="form-control" id="completed" name="completed" value="false" onChange={e => setCompleted(e.target.value)} />
                 </div>
               </div>
               <button type="submit" disabled={!canCreate} className="btn btn-primary">Add Item</button>

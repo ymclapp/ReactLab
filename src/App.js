@@ -1,7 +1,7 @@
 //import logo from './logo.svg';
 import './App.css'
 import { Switch, Route } from 'react-router-dom';
-import Users from './components/Users';
+//import Users from './components/Users';
 import ToDos from './components/ToDos';
 import AddToDo from './components/AddToDo';
 import About from './components/About';
@@ -54,7 +54,7 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <ToDos message="Welcome!" nonadmin />
-            <Users users={data} title="Users" />
+            {/*<Users users={data} title="Users" />*/}
 
             <AddToDo onSubmit={submit} />
 
@@ -64,9 +64,9 @@ function App() {
             <ToDos />
           </Route>
 
-          <Route path="/Users">
+         {/* <Route path="/Users">
             <Users users={data} title="User List" />
-          </Route>
+          </Route>*/}
 
           <Route path="/About">
             <About message="Welcome!" nonadmin />
