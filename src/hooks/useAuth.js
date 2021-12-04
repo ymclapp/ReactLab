@@ -71,7 +71,7 @@ export function AuthProvider(props) {
     });
 
     const resultBody = await result.json();
-    console.log(resultBody);
+    console.log(resultBody)
 
     if (result.ok) {
       let user = processUser(resultBody)

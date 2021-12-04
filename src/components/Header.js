@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 
 function Header() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <Navbar bg="primary" variant="light" expand="lg">
@@ -21,8 +21,8 @@ function Header() {
             {user &&
               <>
                 Welcome back, {user.username}
-                {/*<button onClick={() => logout()}>Sign Out</button>*/}
-                <button>Sign Out</button>
+                <button onClick={() => logout()}>Sign Out</button>
+                {/*<button>Sign Out</button>*/}
               </>
             }
           </Nav>

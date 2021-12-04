@@ -7,26 +7,26 @@ import AddToDo from './components/AddToDo';
 import About from './components/About';
 import Header from './components/Header';
 import Login from './components/auth/Login';
-//import Auth from './components/auth';
+import Auth from './components/auth';
 import { Container, Navbar } from 'react-bootstrap';
 import { useState } from 'react';
 
-const data = [
+//const data = [
   //need to do a get here from the airtable
-  { id: 1, name: 'Autumn', title: 'Do the dishes, post and pans', assigned: 'Cat', difficulty: 1, completed: false },
-  { id: 2, name: 'Shaun T', title: 'Take the dog for a nice long walk.  Do 3 miles at least.', assigned: 'Scott', difficulty: 1, completed: false },
-  { id: 3, name: 'Joel', title: 'Run around the block and see what is up', assigned: 'Brianna', difficulty: 2, completed: false },
-  { id: 4, name: 'Chalene', title: 'Be beautiful', assigned: 'Brett', difficulty: 2, completed: false },
-  { id: 5, name: 'Tony', title: '200 sit ups', assigned: 'Tony', difficulty: 3, completed: false },
-];
+//  { id: 1, name: 'Autumn', title: 'Do the dishes, post and pans', assigned: 'Cat', difficulty: 1, completed: false },
+//  { id: 2, name: 'Shaun T', title: 'Take the dog for a nice long walk.  Do 3 miles at least.', assigned: 'Scott', difficulty: 1, completed: false },
+//  { id: 3, name: 'Joel', title: 'Run around the block and see what is up', assigned: 'Brianna', difficulty: 2, completed: false },
+//  { id: 4, name: 'Chalene', title: 'Be beautiful', assigned: 'Brett', difficulty: 2, completed: false },
+//  { id: 5, name: 'Tony', title: '200 sit ups', assigned: 'Tony', difficulty: 3, completed: false },
+//];
 let nextId = 50;
 
 
 
 function App() {
-  const [toDoItems, setToDoItems] = useState(data);
+  const [toDoItems, setToDoItems] = useState(ToDos);
 
-  function submit(formData) {
+  function handleToDoSubmit(formData) {
     const newToDoItem = {
       ...formData, //copy all the properties into the new object
       id: nextId++, //Guess what next Id will be from API
@@ -36,6 +36,7 @@ function App() {
       ...toDoItems, //Spread = copy all of users into the new array
       newToDoItem,
     ];
+
     setToDoItems(newToDoItems);
   }
 
@@ -53,11 +54,11 @@ function App() {
 
         <Switch>
           <Route path="/" exact>
-            <ToDos message="Welcome!" nonadmin />
+            {/*<ToDos message="Welcome!" nonadmin />*/}
             <ToDos toDos={toDoItems} title="To Do Items" />
-
-            <AddToDo onSubmit={submit} />
-
+            <Auth>
+            <AddToDo onSubmit={handleToDoSubmit} />
+            </Auth>
           </Route>
 
           <Route path="/ToDos">
