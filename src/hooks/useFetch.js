@@ -4,7 +4,7 @@ export default function useFetch(url) {
     //Store fetched data here
     const [loading, setLoading] = useState(true);
     const [shouldFetch, setShouldFetch] = useState(true);
-    const [data, setData] = useState(null);
+    const [toDoItems, setToDoItems] = useState(null);
 
     useEffect(() => {
         //Only fetch if actually loading
@@ -16,7 +16,7 @@ export default function useFetch(url) {
             let body = await response.json();
 
             //TODO: error handling!
-            setData(body);
+            setToDoItems(body);
             setLoading(false);
         };
 
@@ -25,8 +25,8 @@ export default function useFetch(url) {
     }, [url, shouldFetch]) //Only re-fetch when url changes
 
     return useMemo(() => ({
-        data,
+        toDoItems,
         isLoading:  loading,
         reload:  () => setShouldFetch(true),
-    }), [data, loading]);
+    }), [toDoItems, loading]);
 }

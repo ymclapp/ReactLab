@@ -1,25 +1,43 @@
 import { Container } from 'react-bootstrap';
 import { React, useState } from 'react';
 import useAuth from '../hooks/useAuth'
+//import useFetch from '../hooks/useFetch'
 
-function AddToDo(props) {
+//function AddToDo(props) {
+//const { hasPermission } = useAuth();
+//const [title, setTitle] = useState('')
+//const [assignedTo, setAssignedTo] = useState('')
+//const [difficulty, setDifficulty] = useState('')
+
+//const todoApi = 'https://deltav-todo.azurewebsites.net/api/v1/Todos';
+
+export default function AddToDo(props) {
+  //const { reload, isLoading } = useFetch(todoApi);
+  //const { user } = useAuth();
   const { hasPermission } = useAuth();
   const [title, setTitle] = useState('')
   const [assignedTo, setAssignedTo] = useState('')
   const [difficulty, setDifficulty] = useState('')
-  const [completed, setCompleted] = useState('false');
+  const { onSave } = props;
 
-  const submit = e => {
-    e.preventDefault()
-    fetch('https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/', {
-      method: 'POST',
-      body: JSON.stringify({ title, assignedTo, difficulty, completed }),
-    }).catch(err => {
-      console.error(err);
-      alert("There was an error, please try again")
-    })
+  async function handleToDoSubmit(e) {
+    e.preventDefault();
 
-  }
+    const form = e.target;
+    const { title, assignedTo, difficulty } = form.elements;
+
+    const formData = {
+      title:  title.value,
+      assignedTo: assignedTo.value,
+      difficulty:  difficulty.value,
+    };
+
+    onSave(formData);
+
+    form.reset();
+    title.focus();
+
+    }
 
   let canCreate = hasPermission('create');
 
@@ -28,7 +46,8 @@ function AddToDo(props) {
       <div className="col-md-6">
         <div className="card border-dark mb-3">
           <Container>
-            <form onSubmit={submit} action="https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/" method="post" >
+            {/*<form onSubmit={submit} action="https://hooks.zapier.com/hooks/catch/11388983/bmhui8w/" method="post" >*/}
+            <form onSubmit={handleToDoSubmit}>
               <legend>Add To Do Item</legend>
               <div className="form-row">
                 <div className="form-group">
@@ -53,12 +72,6 @@ function AddToDo(props) {
                     id="formControlRange" />
                 </div>
               </div>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="completed">Status:</label>
-                  <input type="text" className="form-control" id="completed" name="completed" value="false" onChange={e => setCompleted(e.target.value)} />
-                </div>
-              </div>
               <button type="submit" disabled={!canCreate} className="btn btn-primary">Add Item</button>
             </form>
           </Container>
@@ -68,4 +81,3 @@ function AddToDo(props) {
   )
 }
 
-export default AddToDo;
