@@ -1,36 +1,29 @@
+import React from 'react'
 import './ToDos.css';
 import useAuth from '../hooks/useAuth'
-import useFetch from '../hooks/useFetch'
+//import useFetch from '../hooks/useFetch'
 import Auth from './auth'
-import { Badge, Toast, Container, Navbar } from 'react-bootstrap'
+import { Badge, Toast, Navbar, Container } from 'react-bootstrap'
 
-const todoApi = 'https://deltav-todo.azurewebsites.net/api/v1/Todos';
+//const todoApi = 'https://deltav-todo.azurewebsites.net/api/v1/Todos';
 
-export default function Todos() {
-    const { data, isLoading, reload } = useFetch(todoApi);
-    const { user } = useAuth();
+export default function ToDoItems(props) {
+    const { toDoItem, onDelete, onUpdate } = props;
+    const { hasPermission } = useAuth();
 
-    async function handleToDoDelete(todo) {
-        console.log('Deleting...', todo);
-        if (!user) {
-            console.warn('Anonymous should not be allowed to delete!');
+    async function handleToDoDelete() {
+        onDelete(toDoItem);
+    }
+
+    async function updateToDoItem() {
+        let canUpdate = hasPermission('update');
+        if (!canUpdate) {
             return;
         }
-
-        //Ideally this would also be encapsulated in useFetch
-        await fetch(`${todoApi}/${todo.id}`, {
-            method: 'delete',
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
-
-        reload();
+        onUpdate(toDoItem);
     }
 
-    if (isLoading) {
-        return (<h2>Loading...</h2>)
-    }
+    let canDelete = hasPermission('delete');
 
     return (
         <>
@@ -39,55 +32,60 @@ export default function Todos() {
                     <Navbar.Brand >To Do List Manager (2)</Navbar.Brand>
                 </Container>
             </Navbar>
-            {data.map(todo => (
+            {toDoItem.map(item => (
+
                 <Toast
+                    onDelete={handleToDoDelete}
                     className="mt-4"
                     style={{ width: "32rem" }}
-                    key={todo.id}>
-                    <Toast.Header>
-                        {todo.completed ?
-                            <Badge pill bg="danger">
-                                Complete
-                            </Badge>
-                            :
-                            <Badge pill bg="success">
-                                Pending
-                            </Badge>}
+                    key={item.id}>
+                    <Toast.Header closeButton={canDelete}>
+                        {/*{toDoItem.completed ?
+                        <Badge className="updateToDoItemClickYes"
+                        onClick={updateToDoItem}
+                        pill bg="danger">
+                            Complete
+                        </Badge> :
+                        <Badge className="updateToDoItemClickNo"
+                        onClick={updateToDoItem}
+                        pill bg="success">
+                            Pending
+                    </Badge>}*/}
                         <span></span>
                         {/*{data.map(todo => (*/}
                         <span
                             className="d-inline-block ms-2 me-auto">
-                            {todo.assignedTo}
+                            {item.assignedTo}
                         </span>
                         {/*<small>
                             11 mins ago
                         </small>*/}
-                        <button
-                            type="button"
-                            className="ml-2 mb-1 close"
-                            data-dismiss="toast"
-                            aria-label="Close">
-                            <span
-                                aria-hidden="true">
-                                {/*&times;*/}
-                            </span>
-                        </button>
+                        {/*<button
+                        type="button"
+                        className="ml-2 mb-1 close"
+                        data-dismiss="toast"
+                        aria-label="Close">
+                        <span
+                            aria-hidden="true">
+                            {/*&times;
+                        </span>
+                    </button>*/}
                     </Toast.Header>
                     {/*<Toast.Body key={todo.id} >*/}
                     <Toast.Body>
                         <p
                             className="todo-title">
-                            {todo.title}
+                            {item.title}
                         </p>
                         <p
                             className="todo-difficulty">
-                            Difficulty:  {todo.difficulty}
+                            Difficulty:  {item.difficulty}
                         </p>
                         <Auth
                             permission='delete'>
                             <button
                                 bg="primary"
-                                onClick={() => handleToDoDelete(todo)}>
+                                onDelete={() => handleToDoDelete(item)}>
                                 Delete
                             </button>
                         </Auth>

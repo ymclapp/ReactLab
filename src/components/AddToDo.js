@@ -1,7 +1,7 @@
 import { Container } from 'react-bootstrap';
 import { React, useState } from 'react';
 import useAuth from '../hooks/useAuth'
-import useFetch from '../hooks/useFetch'
+//import useFetch from '../hooks/useFetch'
 
 //function AddToDo(props) {
 //const { hasPermission } = useAuth();
@@ -9,49 +9,35 @@ import useFetch from '../hooks/useFetch'
 //const [assignedTo, setAssignedTo] = useState('')
 //const [difficulty, setDifficulty] = useState('')
 
-const todoApi = 'https://deltav-todo.azurewebsites.net/api/v1/Todos';
+//const todoApi = 'https://deltav-todo.azurewebsites.net/api/v1/Todos';
 
-export default function AddToDo(todo) {
-  const { reload } = useFetch(todoApi);
-  const { user } = useAuth();
+export default function AddToDo(props) {
+  //const { reload, isLoading } = useFetch(todoApi);
+  //const { user } = useAuth();
   const { hasPermission } = useAuth();
   const [title, setTitle] = useState('')
   const [assignedTo, setAssignedTo] = useState('')
   const [difficulty, setDifficulty] = useState('')
+  const { onSave } = props;
 
-  async function handleToDoSubmit() {
-    console.log('Submitting...', todo);
-    if (!user) {
-      console.warn('Anonymous should not be allowed to add!');
-      return;
+  async function handleToDoSubmit(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const { title, assignedTo, difficulty } = form.elements;
+
+    const formData = {
+      title:  title.value,
+      assignedTo: assignedTo.value,
+      difficulty:  difficulty.value,
+    };
+
+    onSave(formData);
+
+    form.reset();
+    title.focus();
+
     }
-
-    //Ideally this would also be encapsulated in useFetch
-    await fetch(`${todoApi}`, {
-      method: 'post',
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    })
-
-    reload();
-  }
-
-  //if (isLoading) {
-  //  return (<h2>Loading...</h2>)
- // }
-
-  // const submit = e => {
-  //   e.preventDefault()
-  //   fetch(todoApi, {
-  //     method: 'POST',
-  //     body: JSON.stringify({ title, assignedTo, difficulty }),
-  //    }).catch(err => {
-  //      console.error(err);
-  //     alert("There was an error, please try again")
-  //   })
-
-  // }
 
   let canCreate = hasPermission('create');
 
